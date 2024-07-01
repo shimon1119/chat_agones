@@ -21,4 +21,5 @@ docker build --pull -t sample-chat .
 docker run -p 3000:3000 sample-chat
 ```
 
+kind load:
 kind load docker-image sample-chat:latest
