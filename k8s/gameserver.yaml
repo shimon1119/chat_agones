@@ -1,0 +1,28 @@
+apiVersion: agones.dev/v1
+kind: GameServer
+metadata:
+  name: sample-chat
+spec:
+  container: sample-chat
+  ports:
+    - name: app-port
+      portPolicy: Dynamic
+      containerPort: 3000
+      protocol: TCP
+  health:
+    disabled: true
+    initialDelaySeconds: 60
+    periodSeconds: 12
+    failureThreshold: 5
+  template:
+    spec:
+      containers:
+        - name: sample-chat
+          image: sample-chat:latest
+          imagePullPolicy: IfNotPresent
+
+        - name: sdk-client
+          image: sdk-client:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
